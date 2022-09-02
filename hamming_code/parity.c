@@ -1,7 +1,5 @@
 #include "parity.h"
 
-#define BIT_INDEX_TO_DEC(index) pow(2, index-1)
-
 uint64_t num_to_bits(uint64_t data)
 {
     uint64_t dec = 1;
@@ -25,18 +23,13 @@ uint64_t num_to_bits(uint64_t data)
     return bits;
 }
 
-uint64_t bit_index_to_dec(uint64_t index)
-{
-    return pow(2, index-1);
-}
-
 char *to_bin(uint64_t data)
 {
     uint64_t bits_used = num_to_bits(data);
     char *bin = malloc(bits_used);
     while (bits_used != 0)
     {
-        uint64_t dec = bit_index_to_dec(bits_used);
+        uint64_t dec = BIT_INDEX_TO_DEC(bits_used);
         if (dec == data) {
            data -= dec;
            strcat(bin, "1");
@@ -54,7 +47,7 @@ char *to_bin(uint64_t data)
     return bin;
 }
 
-bool check_parity(uint64_t data) // data is hex
+bool check_parity(uint64_t data) // hex or decimal
 {
     char *conv_data = to_bin(data);
     uint64_t positive_bit = 0;
