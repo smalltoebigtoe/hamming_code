@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "parity/parity.h"
+#include "parity.h"
 
 int main(void)
 {
@@ -12,9 +12,7 @@ int main(void)
     {
         printf("Enter a number: ");
         scanf("%lld", &num);
-        printf("%lld -> %d\n", num, to_bin(num));
-        parity_set(&num, 0, 1);
-        printf("%lld -> %d\n", num, to_bin(num));
+        printf("%lld -> %s\n", num, to_bin(num));
     }
  
     return 0;
