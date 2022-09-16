@@ -1,18 +1,23 @@
-objects = main.o parity.o conversion.o
+TARGET = hc
 
-out: $(objects)
-	cc -o out $(objects)
+CC = clang
+CFLAGS = -g -Wall -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
+		 	-Wcast-align  -Wstrict-overflow=5 -Wformat=2 \
+			-Wwrite-strings -Wcast-qual -Wswitch-default -Wformat=2 \
+			-Wswitch-enum -Wconversion -Wunreachable-code
 
-main.o: main.c
-	cc -c main.c
+SOURCES = main.c parity/parity.c parity/conversion.c
+OBJECTS = $(SOURCES:.c=.o)
 
-parity.o : parity.c parity.h
-	cc -c parity.c
+SUBDIRS = parity
 
-conversion.o : conversion.c conversion.h
-	cc -c conversion.c
+$(TARGET): $(OBJECTS)
+	$(CC) -o $< $(CFLAGS) $(SOURCES)
 
-.PHONY : clean
-clean :
-	rm out $(objects)
+parity.o: parity.h
+conversion.o: conversion.h
+
+.PHONY: clean
+clean:
+	-rm $(TARGET) $(objects)
 
