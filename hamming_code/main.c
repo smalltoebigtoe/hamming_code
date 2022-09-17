@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "parity/parity.h"
-#include "parity/conversion.h"
+#include "parity.h"
+#include "conversion.h"
 
 int main(void)
 {
